@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.main-page {
+  padding: 96px 64px;
+}
+
+.main-container {
+    @apply items-center min-h-screen p-20 pt-22 gap-16
+  }
+
+.card-title {
+    @apply text-xl font-semibold
+    pt-5 px-5 pb-2
+    cursor-pointer
+    hover:underline;
+  }
+
+.card-room {
+  @apply rounded-lg 
+  text-base px-2 py-1 
+  border border-gray-200
+  flex 
+}
+
+.button {
+  @apply hover:bg-stone-100
+  hover:text-blue-800
+  bg-blue-800 
+  text-white
+  font-medium rounded-lg 
+  text-base px-5 py-2.5 me-2 mb-2 w-full
+  cursor-pointer
+}
+
+.asset-room{
+  @apply w-5 h-5
+}
+
+.home-title {
+  @apply flex 
+  justify-center
+  font-bold
+  text-2xl
+  pb-4
+}
+
+.page-title {
+  @apply text-2xl 
+  font-bold
+  pb-2
+}
+
+.img-contact {
+  @apply w-8 h-8 pr-2
+}
+
+.page-topic {
+  @apply text-xl
+  font-bold
+}
+
+.asset-room-detail {
+  @apply w-7 h-7
+}
+
+.grid-estate-card {
+  @apply grid 
+  grid-cols-1 
+  sm:grid-cols-1 
+  md:grid-cols-3 
+  lg:grid-cols-3 
+  gap-4
+}
+
+.button-contact {
+  @apply 
+  bg-blue-800 
+  text-white
+  hover:bg-stone-100
+  hover:text-blue-800
+  font-medium rounded-lg 
+  text-base px-5 py-2.5 me-2 mb-2 w-full
+  cursor-pointer
+}
+
+.search-bar {
+  @apply block p-2.5 w-full z-20 
+  text-sm text-gray-900
+  bg-gray-50 rounded-e-lg
+  border-s-gray-50 border-s-2 border 
+  border-gray-300
+  focus:ring-blue-500
+  focus:border-blue-500
+  dark:bg-gray-700
+  dark:border-s-gray-700 
+  dark:border-gray-600 
+  dark:placeholder-gray-400 
+  dark:text-white 
+  dark:focus:border-blue-500
+}
+
+.search-button{
+  @apply absolute top-0 end-0 p-2.5 text-sm font-medium h-full
+  text-white 
+  bg-blue-700 rounded-e-lg border 
+  border-blue-700 
+  hover:bg-blue-800 focus:ring-4 focus:outline-none 
+  focus:ring-blue-300 
+  dark:bg-blue-600 
+  dark:hover:bg-blue-700 
+  dark:focus:ring-blue-800
+}
+
+.search-select{
+  @apply shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium 
+  text-gray-900 
+  bg-gray-100 border 
+  border-gray-300 rounded-s-lg 
+  hover:bg-gray-200 focus:ring-4 focus:outline-none 
+  focus:ring-gray-100 
+  dark:bg-gray-700 
+  dark:hover:bg-gray-600 
+  dark:focus:ring-gray-700 
+  dark:text-white 
+  dark:border-gray-600
+}
+
+.grid-article-card {
+  @apply grid 
+  grid-cols-1 
+  sm:grid-cols-1 
+  md:grid-cols-1 
+  lg:grid-cols-2 
+  gap-4
+}
+
+.asset-img-select{
+  @apply max-h-30 
+  cursor-pointer
+  transition-all 
+  duration-300 
+  ease-in-out 
+  hover:scale-110 
+  hover:shadow-lg
+}
+
+.img-detail{
+  @apply w-full max-h-140 
+  object-fill
+}
+
+.article-img {
+  @apply h-40 w-full
+}
+
+.article-back {
+  @apply bg-blue-800
+  w-20 h-20
+  items-center
+  justify-center
+  flex
+}
+
+.article-main-grid {
+  @apply grid 
+  grid-cols-2 
+  sm:grid-cols-1 
+  md:grid-cols-1 
+  lg:grid-cols-2 
+  gap-4
+}
