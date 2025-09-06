@@ -1,0 +1,138 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "serviceApiRealestate",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/about": {
+      "get": {
+        "tags": [
+          "about"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/about/principles": {
+      "get": {
+        "tags": [
+          "about"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/asset/{typeasset}": {
+      "get": {
+        "tags": [
+          "asset"
+        ],
+        "parameters": [
+          {
+            "name": "typeasset",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/asset/detail/{id}": {
+      "get": {
+        "tags": [
+          "asset"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/contact": {
+      "get": {
+        "tags": [
+          "contact"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/menu": {
+      "get": {
+        "tags": [
+          "menu"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/news": {
+      "get": {
+        "tags": [
+          "news"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/news/detail/{id}": {
+      "get": {
+        "tags": [
+          "news"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": { }
+}
