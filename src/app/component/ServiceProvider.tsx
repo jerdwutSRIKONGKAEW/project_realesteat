@@ -11,6 +11,11 @@ export async function FetchAbout() {
   return RequestFunction(`${url}/about`, );
 }
 
+export async function FetchPrinciples() {
+  let url = constructure.url;
+  return RequestFunction(`${url}/about/principles`, );
+}
+
 export async function FetchAsset(typeasset:string) {
   let url = constructure.url;
   return RequestFunction(`${url}/asset/${typeasset}`, );
@@ -24,4 +29,14 @@ export async function FetchContact() {
 export async function FetchAssetDetail(id: Number) {
   let url = constructure.url;
   return RequestFunction(`${url}/asset/detail/${id}`, );
+}
+
+export async function FetchNews() {
+  let url = constructure.url;
+  return RequestFunction(`${url}/news`, );
+}
+
+export async function FetchNewsDetail(id: Number) {
+  let url = constructure.url;
+  return RequestFunction(`${url}/news/detail/${id}`, );
 }

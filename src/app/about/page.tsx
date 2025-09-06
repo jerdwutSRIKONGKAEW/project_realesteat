@@ -36,10 +36,6 @@ const About = () => {
     }
   };
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
@@ -65,18 +61,7 @@ const About = () => {
       
       <AdviceAsset />
       
-      <button
-        onClick={handleOpenModal}
-        className="mt-4 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg shadow-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-      >
-        เปิดติดต่อเรา
-      </button>
-      
-      {/* Modal Component */}
-      <ContactModal 
-        isOpen={isModalOpen} 
-        onClose={handleCloseModal} 
-      />
+     
     </div>
   );
 };

@@ -16,17 +16,20 @@ const PopularAsset = () => {
             {
                 type: "บ้านเดี่ยว",
                 description: "พื้นที่กว้างขวาง ให้ทุกความสุขของครอบครัวเริ่มต้นที่นี่…บ้านเดี่ยวคุณภาพ",
-                typecode: "SH"
+                typecode: "SH",
+                img: "/image/advice_singlehouse.jpg"
             },
             {
                 type: "คอนโด",
                 description: "ชีวิตเมืองที่ลงตัว ใกล้ที่ทำงาน ห้างสรรพสินค้า และแหล่งไลฟ์สไตล์",
-                typecode: "CD"
+                typecode: "CD",
+                img: "/image/advice_condo.jpg"
             },
             {
                 type: "อาคารพานิชย์",
                 description: "ลงทุนคุ้ม ทำเลทอง อาคารพานิชย์ที่พร้อมเป็นทั้งบ้านและธุรกิจในที่เดียว",
-                typecode: "CB"
+                typecode: "CB",
+                img: "/image/advice_commercial.jpg"
             }
         ]
     };
@@ -60,22 +63,18 @@ const PopularAsset = () => {
 
     const PopularList = () => {
         return (
-            <div className='grid-asset-card'>
+            <div className='grid-estate-card'>
                 {
                     PopularData.assetType.map((item, index) => (
-                       
-                            <Cards src="/image/imageTest.jpg" key={index}>
-                                <div className='grid gap-2'>
-                                    <div className='card-title'>
-                                        {item.type}
-                                    </div>
-                                    <div>
-                                        {item.description}
-                                    </div>
-                                    <button type="button" className="button" onClick={() => handleClickPage(item.typecode)}>ค้นหา</button>
+
+                        <Cards src={item.img} key={index} title={item.type} href={`/estate/${item.typecode}`}>
+                            <div className='grid gap-2'>
+                                <div>
+                                    {item.description}
                                 </div>
-                            </Cards>
-                      
+                            </div>
+                        </Cards>
+
                     ))
                 }
 

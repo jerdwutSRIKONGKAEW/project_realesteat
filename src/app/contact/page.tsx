@@ -47,7 +47,10 @@ const Contact = () => {
             contactListData.map((item, index) => (
               <div key={item.id} className='grid grid-cols-3 gap-4'>
                 <div>
-                  <img src='/icons/tel.svg' className='h-75' />
+                  <img className='h-75'
+                    src={`data:image/png;base64,${item.img_company}`}
+                    alt="Example"
+                  />
                 </div>
                 <div className='col-span-2 ...'>
                   <iframe

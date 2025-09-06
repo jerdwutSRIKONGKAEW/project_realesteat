@@ -8,7 +8,7 @@ import HomeBanner from './component/assets/HomeBanner';
 export default function Home() {
   return (
     <div className="main-container">
-      <div className='space-y-4'>
+      <div className='grid gap-10'>
         <HomeBanner />
         <PopularAsset />
         <ArticleAsset />

@@ -24,11 +24,23 @@ const EstateDetail = ({ searchParams }: EstateDetailPageProps) => {
         asset_area: string;
         asset_contact: string;
         asset_text: string;
+        asset_map: string;
+        img: {
+            asset_img1: string;
+            asset_img2: string;
+            asset_img3: string;
+            asset_img4: string;
+            asset_img5: string;
+            asset_img6: string;
+            asset_img7: string;
+            asset_img8: string;
+        }[];
     };
 
     const [assetListData, setAssetListData] = useState<AssetItem[]>([]);
     const [loadingData, setLoadingData] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState('');
 
     useEffect(() => {
         if (assetId) {
@@ -65,7 +77,6 @@ const EstateDetail = ({ searchParams }: EstateDetailPageProps) => {
         setIsModalOpen(false);
     };
 
-
     const formatNumber = (num: string | number): string => {
         if (!num) return '0';
 
@@ -75,6 +86,65 @@ const EstateDetail = ({ searchParams }: EstateDetailPageProps) => {
 
         return Number(cleanNum).toLocaleString('en-US');
     };
+
+
+    const imgList = () => {
+        return assetListData.map((item, index) => (
+            item.img.map((img, imgIndex) => (
+                <div key={imgIndex}>
+                    <img src={`data:image/png;base64,${ selectedImage || img.asset_img1}`} 
+                    alt="Banner" 
+                    className="img-detail" />
+                    <div className="justify-center flex">
+
+                        <div className="pt-4 grid grid-cols-8 gap-4">
+                            <img src={`data:image/png;base64,${img.asset_img1}`} 
+                            alt="assetimage" 
+                            className="asset-img-select" 
+                            onClick={()=> setSelectedImage(img.asset_img1)}
+                            />
+                            <img src={`data:image/png;base64,${img.asset_img2}`} 
+                            alt="assetimage" 
+                            className="asset-img-select" 
+                            onClick={()=> setSelectedImage(img.asset_img2)}
+                            />
+                            <img src={`data:image/png;base64,${img.asset_img3}`} 
+                            alt="assetimage" 
+                            className="asset-img-select" 
+                            onClick={()=> setSelectedImage(img.asset_img3)}
+                            />
+                            <img src={`data:image/png;base64,${img.asset_img4}`} 
+                            alt="assetimage" 
+                            className="asset-img-select" 
+                            onClick={()=> setSelectedImage(img.asset_img4)}
+                            />
+                            <img src={`data:image/png;base64,${img.asset_img5}`} 
+                            alt="assetimage" 
+                            className="asset-img-select" 
+                            onClick={()=> setSelectedImage(img.asset_img5)}
+                            />
+                            <img src={`data:image/png;base64,${img.asset_img6}`} 
+                            alt="assetimage" 
+                            className="asset-img-select" 
+                            onClick={()=> setSelectedImage(img.asset_img6)}
+                            />
+                            <img src={`data:image/png;base64,${img.asset_img7}`} 
+                            alt="assetimage" 
+                            className="asset-img-select" 
+                            onClick={()=> setSelectedImage(img.asset_img7)}
+                            />
+                            <img src={`data:image/png;base64,${img.asset_img8}`} 
+                            alt="assetimage" 
+                            className="asset-img-select" 
+                            onClick={()=> setSelectedImage(img.asset_img8)}
+                            />
+                            
+                        </div>
+                    </div>
+                </div>
+            ))
+        ))
+    }
 
     const dataList = () => {
         if (loadingData) {
@@ -96,7 +166,6 @@ const EstateDetail = ({ searchParams }: EstateDetailPageProps) => {
                 assetListData.map((item, index) => {
                     return (
                         <div key={index}>
-                            <img src="/image/imageTest.jpg" alt="Banner" className="w-full" />
                             <div className='grid grid-cols-2 gap-4 p-3'>
                                 <div className="grid gap-4">
                                     <div className="page-topic">
@@ -142,6 +211,16 @@ const EstateDetail = ({ searchParams }: EstateDetailPageProps) => {
                                     </div>
                                 </div>
                             </div>
+                            <iframe
+                                src={item.asset_map}
+                                width="100%"
+                                height="300px"
+                                frameBorder="0"
+                                style={{ border: "0px" }}
+
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                            ></iframe>
                         </div>
                     )
                 }) :
@@ -165,11 +244,14 @@ const EstateDetail = ({ searchParams }: EstateDetailPageProps) => {
 
     return (
         <div className='main-container'>
-            <div className="page-title pb-2">อสังหาริมทรัพย์</div>
+
             <div>
+                {imgList()}
                 {dataList()}
             </div>
-            <AdviceAsset />
+            <div className="pt-3">
+                <AdviceAsset />
+            </div>
         </div>
     );
 };

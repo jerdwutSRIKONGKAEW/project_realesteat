@@ -1,5 +1,4 @@
 export default {
-    color_main: "#01579B",
-    th_name: "",
-    en_name: "",
+    th_name: "บ้านอยู่เย็น",
+    en_name: "BaanYooYen",
 }

@@ -18,15 +18,25 @@ const Estate = () => {
         asset_area: string;
         asset_contact: string;
         asset_text: string;
+        asset_img: string;
     };
 
     const [assetListData, setAssetListData] = useState<AssetItem[]>([]);
+    const [filteredData, setFilteredData] = useState<AssetItem[]>([]);
     const [loadingData, setloadingData] = useState(true);
     const [selectData, setSelectData] = useState("ALL");
+    const [searchQuery, setSearchQuery] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
+    const [favoriteAssets, setFavoriteAssets] = useState<number[]>([]);
 
     useEffect(() => {
         fetchAsset();
+        loadFavoritesFromCookie();
     }, [selectData]);
+
+    useEffect(() => {
+        handleSearch();
+    }, [assetListData, searchQuery]);
 
     const fetchAsset = async () => {
         try {
@@ -39,36 +49,60 @@ const Estate = () => {
                 setAssetListData(res.asset);
             } else {
                 console.log("ดึงข้อมูลไม่สำเร็จ หรือโครงสร้างข้อมูลไม่ถูกต้อง");
+                setAssetListData([]);
             }
         } catch (e) {
             console.error("error", e);
+            setAssetListData([]);
         } finally {
             setloadingData(false);
         }
     };
 
+    const handleSearch = () => {
+        if (!searchQuery.trim()) {
+            setFilteredData(assetListData);
+        } else {
+            const filtered = assetListData.filter(item =>
+                item.asset_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                item.asset_address.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+            setFilteredData(filtered);
+        }
+        setCurrentPage(1); // รีเซ็ตไปหน้าแรกเมื่อค้นหา
+    };
+
+        const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(e.target.value);
+    };
+
+    const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        // การค้นหาจะทำงานอัตโนมัติผ่าน useEffect
+    };
+
     const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value
         setSelectData(value)
+        setSearchQuery("") // เคลียร์การค้นหาเมื่อเปลี่ยนประเภท
 
-        // Navigate ไปยังหน้าใหม่ตาม type ที่เลือก
+        // ไปยังหน้าใหม่ตาม type ที่เลือก
         if (value === "ALL") {
-            router.push('/estate') // กลับไปหน้าหลัก
+            router.push('/estate')
         } else {
-            router.push(`/estate/${value}`) // ไปหน้าย่อยตาม type
+            router.push(`/estate/${value}`)
         }
     };
 
-
     const selectSearch = () => {
         return (
-            <form className="max-w mx-auto pb-3">
+            <form className="max-w mx-auto pb-3" onSubmit={handleSearchSubmit}>
                 <div className="flex">
                     <select
                         value={selectData}
                         onChange={handleSelectChange}
                         id="countries"
-                        className="shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium  text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+                        className="search-select"
                     >
                         <option value="ALL">ทั้งหมด</option>
                         <option value="CD">คอนโด</option>
@@ -78,41 +112,177 @@ const Estate = () => {
                         <option value="TH">ทาวน์เฮ้าส์</option>
                     </select>
 
-
                     <div className="relative w-full">
-                        <input type="search" id="search-dropdown" className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search..." required />
-                        <button type="submit" className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                            </svg>
-                            <span className="sr-only">Search</span>
-                        </button>
+                        <input
+                            type="search"
+                            id="search-dropdown"
+                            className="search-bar"
+                            placeholder="ค้นหาจากชื่ออสังหาหรือที่อยู่..."
+                            value={searchQuery}
+                            onChange={handleSearchInputChange}
+                        />
                     </div>
                 </div>
             </form>
         )
     }
-    
-    const selectList = () => {
-        return (
-            <div className="max-w-40 py-2">
-                <select
-                    value={selectData}
-                    onChange={handleSelectChange}
-                    id="countries"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                >
-                    <option value="ALL">ทั้งหมด</option>
-                    <option value="CD">คอนโด</option>
-                    <option value="SH">บ้านเดี่ยว</option>
-                    <option value="SD">บ้านแฝด</option>
-                    <option value="CB">อาคารพานิชย์</option>
-                    <option value="TH">ทาวน์เฮ้าส์</option>
-                </select>
 
+
+    const itemsPerPage = 9;
+    const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const currentItems = filteredData.slice(startIndex, endIndex);
+
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    const TotalPage = () => {
+        return <div>
+            {filteredData.length > 0 && (
+                <div className="text-center mt-4 text-gray-600">
+                    รายการที่ {startIndex + 1} - {Math.min(endIndex, filteredData.length)} จาก ({filteredData.length} รายการ)
+                    {searchQuery && (
+                        <div className="text-sm text-blue-600 mt-1">
+                            ผลการค้นหา: "{searchQuery}"
+                        </div>
+                    )}
+                </div>
+            )}
+            {filteredData.length === 0 && !loadingData && searchQuery && (
+                <div className="text-center mt-4 text-gray-600">
+                    <div className="text-lg">ไม่พบข้อมูลที่ค้นหา</div>
+                    <div className="text-sm text-blue-600 mt-1">
+                        คำค้นหา: "{searchQuery}"
+                    </div>
+                </div>
+            )}
+        </div>
+    }
+
+    const Pagination = () => {
+        if (totalPages <= 1) return null;
+
+        const pages = [];
+        for (let i = 1; i <= totalPages; i++) {
+            pages.push(i);
+        }
+
+        return (
+            <div className="flex justify-center items-center mt-8 gap-2">
+                {/* Previous Button */}
+                <button
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className={`px-3 py-2 rounded-md ${currentPage === 1
+                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                        : 'bg-blue-800 text-white hover:bg-blue-800'
+                        }`}
+                >
+                    ←
+                </button>
+
+                {/* Page Numbers */}
+                {pages.map((page) => (
+                    <button
+                        key={page}
+                        onClick={() => handlePageChange(page)}
+                        className={`px-3 py-2 rounded-md ${currentPage === page
+                            ? 'bg-blue-800 text-white'
+                            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                            }`}
+                    >
+                        {page}
+                    </button>
+                ))}
+
+                {/* Next Button */}
+                <button
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className={`px-3 py-2 rounded-md ${currentPage === totalPages
+                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                        : 'bg-blue-800 text-white hover:bg-blue-800'
+                        }`}
+                >
+                    →
+                </button>
             </div>
         );
     };
+
+     // ฟังก์ชันคุกกี้
+    const getCookie = (name: string): string | null => {
+        if (typeof document === 'undefined') return null;
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop()?.split(';').shift() || null;
+        return null;
+    };
+
+    const setCookie = (name: string, value: string) => {
+        if (typeof document === 'undefined') return;
+        const expires = new Date();
+        expires.setTime(expires.getTime() + (30 * 24 * 60 * 60 * 1000));
+        document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+    };
+
+    const loadFavoritesFromCookie = () => {
+        const favoriteCookie = getCookie('favorite_assets');
+        if (favoriteCookie) {
+            try {
+                const favorites = JSON.parse(favoriteCookie);
+                setFavoriteAssets(favorites);
+            } catch (e) {
+                console.error('Error parsing favorite assets cookie:', e);
+                setFavoriteAssets([]);
+            }
+        }
+    };
+
+    const saveFavoritesToCookie = (favorites: number[]) => {
+        setCookie('favorite_assets', JSON.stringify(favorites));
+    };
+
+    const toggleFavorite = (assetNo: number) => {
+        let updatedFavorites;
+        if (favoriteAssets.includes(assetNo)) {
+            // ลบออกจากรายการโปรด
+            updatedFavorites = favoriteAssets.filter(id => id !== assetNo);
+        } else {
+            // เพิ่มในรายการโปรด
+            updatedFavorites = [...favoriteAssets, assetNo];
+        }
+        setFavoriteAssets(updatedFavorites);
+        saveFavoritesToCookie(updatedFavorites);
+    };
+
+     const FavoriteButton = ({ assetNo }: { assetNo: number }) => {
+        const isFavorite = favoriteAssets.includes(assetNo);
+        
+        return (
+            <button 
+                type="button" 
+                onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleFavorite(assetNo);
+                }}
+                className={`border rounded-sm p-2 transition-colors ${
+                    isFavorite 
+                        ? 'border-pink-500 bg-pink-500 text-white hover:bg-pink-600' 
+                        : 'border-pink-200 hover:bg-pink-200 hover:text-pink-400 text-pink-400'
+                }`}
+            >
+                <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                    <path d="M3 7H1a1 1 0 0 0-1 1v8a2 2 0 0 0 4 0V8a1 1 0 0 0-1-1Zm12.954 0H12l1.558-4.5a1.778 1.778 0 0 0-3.331-1.06A24.859 24.859 0 0 1 6 6.8v9.586h.114C8.223 16.969 11.015 18 13.6 18c1.4 0 1.592-.526 1.88-1.317l2.354-7A2 2 0 0 0 15.954 7Z" />
+                </svg>
+            </button>
+        );
+    };
+
 
     const dataList = () => {
         if (loadingData) {
@@ -129,14 +299,13 @@ const Estate = () => {
             );
         }
         return (
-            <div className="grid-asset-card">
+            <div className="grid-estate-card">
                 {
-                    assetListData.length > 0 ?
-                        assetListData.map((item, index) => (
-                            <Cards key={index} src='/image/imageTest.jpg' href={`/estate/detail?id=${item.asset_no}`}>
+                    currentItems.length > 0 ?
+                        currentItems.map((item, index) => (
+                            <Cards key={index} title={item.asset_name} favoriteButton={<FavoriteButton assetNo={item.asset_no} />} src={`data:image/png;base64,${item.asset_img}`} href={`/estate/detail?id=${item.asset_no}`}>
                                 <div className="grid gap-1">
-                                    <div className="card-title">{item.asset_name}</div>
-                                    <div>{item.asset_text}</div>
+                                    <div className='truncate'>{item.asset_text}</div>
                                     <div className="flex">
                                         <div className="card-room">
                                             <img className="asset-room" src='/image/bed.svg' />
@@ -147,7 +316,7 @@ const Estate = () => {
                                     </div>
                                     <div className='flex'>
                                         <img className="asset-room" src='/image/location.svg' />
-                                        <div>{item.asset_address}</div>
+                                        <div className='truncate'>{item.asset_address}</div>
                                     </div>
                                 </div>
                             </Cards>
@@ -165,6 +334,8 @@ const Estate = () => {
             </div>
             <div>
                 {dataList()}
+                {TotalPage()}
+                {Pagination()}
             </div>
         </div>
     );
