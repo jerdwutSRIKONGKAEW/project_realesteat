@@ -1,0 +1,6 @@
+@serviceApiWebAdminRealestate_HostAddress = http://localhost:5086
+
+GET {{serviceApiWebAdminRealestate_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

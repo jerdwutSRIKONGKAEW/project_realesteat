@@ -1,0 +1,1012 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "serviceApiWebAdminRealestate",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/about": {
+      "get": {
+        "tags": [
+          "about"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/about/principles": {
+      "get": {
+        "tags": [
+          "about"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/about/update-about": {
+      "put": {
+        "tags": [
+          "about"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAboutDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAboutDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAboutDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/about/update-principles": {
+      "put": {
+        "tags": [
+          "about"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAboutPrinciplesDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAboutPrinciplesDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAboutPrinciplesDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Account/Login": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/asset": {
+      "get": {
+        "tags": [
+          "asset"
+        ],
+        "parameters": [
+          {
+            "name": "typeasset",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "ALL"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/asset/update/{id}": {
+      "put": {
+        "tags": [
+          "asset"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAssetDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAssetDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAssetDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/asset/delete/{id}": {
+      "delete": {
+        "tags": [
+          "asset"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/asset/create": {
+      "post": {
+        "tags": [
+          "asset"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAssetDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAssetDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAssetDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/contact": {
+      "get": {
+        "tags": [
+          "contact"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/contact/update": {
+      "put": {
+        "tags": [
+          "contact"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateContactDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateContactDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateContactDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/menu": {
+      "get": {
+        "tags": [
+          "menu"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/news": {
+      "get": {
+        "tags": [
+          "news"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/news/detail/{id}": {
+      "get": {
+        "tags": [
+          "news"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/news/update/{id}": {
+      "put": {
+        "tags": [
+          "news"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateNewsDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateNewsDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateNewsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/news/delete/{id}": {
+      "delete": {
+        "tags": [
+          "news"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/news/create": {
+      "post": {
+        "tags": [
+          "news"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateNewsDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateNewsDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateNewsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccount": {
+      "get": {
+        "tags": [
+          "UserAccount"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserAccounts"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserAccounts"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserAccounts"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "UserAccount"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserAccounts"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserAccounts"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserAccounts"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "UserAccount"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserAccounts"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserAccounts"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserAccounts"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccount/{id}": {
+      "get": {
+        "tags": [
+          "UserAccount"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserAccounts"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserAccounts"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserAccounts"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "UserAccount"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateAssetDto": {
+        "type": "object",
+        "properties": {
+          "asset_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "asset_type": {
+            "type": "string",
+            "nullable": true
+          },
+          "asset_address": {
+            "type": "string",
+            "nullable": true
+          },
+          "asset_sale_price": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "asset_rent_price": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "asset_room_bed": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "asset_room_bath": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "asset_area": {
+            "type": "string",
+            "nullable": true
+          },
+          "asset_contact": {
+            "type": "string",
+            "nullable": true
+          },
+          "asset_text": {
+            "type": "string",
+            "nullable": true
+          },
+          "owner_no": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "asset_map": {
+            "type": "string",
+            "nullable": true
+          },
+          "asset_img1": {
+            "type": "string",
+            "nullable": true
+          },
+          "asset_img2": {
+            "type": "string",
+            "nullable": true
+          },
+          "asset_img3": {
+            "type": "string",
+            "nullable": true
+          },
+          "asset_img4": {
+            "type": "string",
+            "nullable": true
+          },
+          "asset_img5": {
+            "type": "string",
+            "nullable": true
+          },
+          "asset_img6": {
+            "type": "string",
+            "nullable": true
+          },
+          "asset_img7": {
+            "type": "string",
+            "nullable": true
+          },
+          "asset_img8": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateNewsDto": {
+        "type": "object",
+        "properties": {
+          "news_title": {
+            "type": "string",
+            "nullable": true
+          },
+          "news_detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "news_image": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "access_token": {
+            "type": "string",
+            "nullable": true
+          },
+          "expires_in": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateAboutDto": {
+        "required": [
+          "about_text"
+        ],
+        "type": "object",
+        "properties": {
+          "about_text": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateAboutPrinciplesDto": {
+        "required": [
+          "about_condo",
+          "about_condo_details",
+          "about_house",
+          "about_house_details",
+          "about_principles",
+          "about_principles_details"
+        ],
+        "type": "object",
+        "properties": {
+          "about_principles": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "about_principles_details": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "about_house": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "about_house_details": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "about_condo": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "about_condo_details": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "about_img1": {
+            "type": "string",
+            "nullable": true
+          },
+          "about_img2": {
+            "type": "string",
+            "nullable": true
+          },
+          "about_img3": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateAssetDto": {
+        "required": [
+          "asset_address",
+          "asset_area",
+          "asset_contact",
+          "asset_name",
+          "asset_rent_price",
+          "asset_room_bath",
+          "asset_room_bed",
+          "asset_sale_price",
+          "asset_text",
+          "asset_type",
+          "owner_no"
+        ],
+        "type": "object",
+        "properties": {
+          "asset_name": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "asset_type": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "asset_address": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "asset_sale_price": {
+            "type": "number",
+            "format": "double"
+          },
+          "asset_rent_price": {
+            "type": "number",
+            "format": "double"
+          },
+          "asset_room_bed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "asset_room_bath": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "asset_area": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "asset_contact": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "asset_text": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "owner_no": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "asset_map": {
+            "type": "string",
+            "nullable": true
+          },
+          "asset_img1": {
+            "type": "string",
+            "nullable": true
+          },
+          "asset_img2": {
+            "type": "string",
+            "nullable": true
+          },
+          "asset_img3": {
+            "type": "string",
+            "nullable": true
+          },
+          "asset_img4": {
+            "type": "string",
+            "nullable": true
+          },
+          "asset_img5": {
+            "type": "string",
+            "nullable": true
+          },
+          "asset_img6": {
+            "type": "string",
+            "nullable": true
+          },
+          "asset_img7": {
+            "type": "string",
+            "nullable": true
+          },
+          "asset_img8": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateContactDto": {
+        "required": [
+          "company",
+          "facebook",
+          "img_company",
+          "line",
+          "location",
+          "mail",
+          "tel"
+        ],
+        "type": "object",
+        "properties": {
+          "tel": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "facebook": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "line": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "mail": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "location": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "company": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "img_company": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateNewsDto": {
+        "required": [
+          "news_detail",
+          "news_image",
+          "news_title"
+        ],
+        "type": "object",
+        "properties": {
+          "news_title": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "news_detail": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "news_image": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserAccounts": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "full_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Enter your JWT Access Token",
+        "scheme": "Bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}
