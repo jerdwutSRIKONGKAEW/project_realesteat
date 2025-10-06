@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Designed at https://www.figma.com/design/ubXSwCrAOWjp3u2QZ3A1Xe/real-estate-project?node-id=0-1&t=PBUW43VqBNvw4VDN-1
 
 ## Getting Started
 
